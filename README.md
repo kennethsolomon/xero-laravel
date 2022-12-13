@@ -1,9 +1,9 @@
 # 💸 Xero Laravel
 
-Xero Laravel allows developers to access the Xero accounting system using 
+Xero Laravel allows developers to access the Xero accounting system using
 an Eloquent-like syntax.
 
-Please note that this version of Xero Laravel supports the Xero OAuth 2.0 
+Please note that this version of Xero Laravel supports the Xero OAuth 2.0
 implementation. Older Xero apps using OAuth 1.x are no longer supported.
 
 <p align="center">
@@ -14,22 +14,22 @@ implementation. Older Xero apps using OAuth 1.x are no longer supported.
     <a href="https://github.styleci.io/repos/153256469">
         <img src="https://github.styleci.io/repos/153256469/shield?branch=master" alt="StyleCI">
     </a>
-    <a href="https://packagist.org/packages/langleyfoxall/xero-laravel/stats">
-        <img src="https://img.shields.io/packagist/dt/langleyfoxall/xero-laravel.svg" />
+    <a href="https://packagist.org/packages/KennethSolomon/xero-laravel/stats">
+        <img src="https://img.shields.io/packagist/dt/KennethSolomon/xero-laravel.svg" />
     </a>
 </p>
 
 ## Installation
 
-Xero Laravel can be easily installed using Composer. Just run the following 
+Xero Laravel can be easily installed using Composer. Just run the following
 command from the root of your project.
 
 ```bash
-composer require langleyfoxall/xero-laravel
+composer require KennethSolomon/xero-laravel
 ```
 
-If you have never used the Composer dependency manager before, head 
-to the [Composer website](https://getcomposer.org/) for more information 
+If you have never used the Composer dependency manager before, head
+to the [Composer website](https://getcomposer.org/) for more information
 on how to get started.
 
 ## Setup
@@ -38,16 +38,16 @@ First, run the following `artisan` command from the root of your project. This
 will publish the package configuration file.
 
 ```bash
-php artisan vendor:publish --provider="LangleyFoxall\XeroLaravel\Providers\XeroLaravelServiceProvider"
+php artisan vendor:publish --provider="KennethSolomon\XeroLaravel\Providers\XeroLaravelServiceProvider"
 ```
 
-You now need to populate the `config/xero-laravel-lf.php` file with the 
+You now need to populate the `config/xero-laravel-lf.php` file with the
 credentials for your Xero app(s). You can create apps and find the
-required credentials in the [My Apps](https://developer.xero.com/myapps/) 
+required credentials in the [My Apps](https://developer.xero.com/myapps/)
 section of your Xero account.
 
-If you only intend to use one Xero app, the standard configuration 
-file should be sufficient. All you will need to do is add the following 
+If you only intend to use one Xero app, the standard configuration
+file should be sufficient. All you will need to do is add the following
 variables to your `.env` file.
 
 ```
@@ -73,7 +73,7 @@ The controller below shows these steps in action.
 <?php
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LangleyFoxall\XeroLaravel\OAuth2;
+use KennethSolomon\XeroLaravel\OAuth2;
 use League\OAuth2\Client\Token\AccessToken;
 
 class XeroController extends Controller
@@ -95,7 +95,7 @@ class XeroController extends Controller
     {
         // Step 2 - Capture the response from Xero, and obtain an access token.
         $accessToken = $this->getOAuth2()->getAccessTokenFromXeroRequest($request);
-        
+
         // Step 3 - Retrieve the list of tenants (typically Xero organisations), and let the user select one.
         $tenants = $this->getOAuth2()->getTenants($accessToken);
         $selectedTenant = $tenants[0]; // For example purposes, we're pretending the user selected the first tenant.
@@ -124,9 +124,9 @@ class XeroController extends Controller
 }
 ```
 
-By default, only a limited number of scopes are defined in the configuration file (space separated). You will probably 
-want to add to the scopes depending on your application's intended purpose. For example adding the 
-`accounting.transactions` scope allows you to manage invoices, and adding the `accounting.contacts.read` allows you to 
+By default, only a limited number of scopes are defined in the configuration file (space separated). You will probably
+want to add to the scopes depending on your application's intended purpose. For example adding the
+`accounting.transactions` scope allows you to manage invoices, and adding the `accounting.contacts.read` allows you to
 read contact information.
 
 Xero's documentation provides a full [list of available scopes](https://developer.xero.com/documentation/oauth2/scopes).
@@ -138,10 +138,10 @@ To use Xero Laravel, you first need to get retrieve your user's stored access to
 to create a new `XeroApp` object which represents your Xero application.
 
 ```php
-use LangleyFoxall\XeroLaravel\XeroApp;
+use KennethSolomon\XeroLaravel\XeroApp;
 use League\OAuth2\Client\Token\AccessToken;
 
-$user = auth()->user(); 
+$user = auth()->user();
 
 $xero = new XeroApp(
             new AccessToken(json_decode($user->xero_oauth_2_access_token)),
@@ -149,13 +149,13 @@ $xero = new XeroApp(
         );
 ```
 
-You can then immediately access Xero data using Eloquent-like syntax. The 
-following code snippet shows the available syntax. When multiple results 
+You can then immediately access Xero data using Eloquent-like syntax. The
+following code snippet shows the available syntax. When multiple results
 are returned from the API they will be returned as Laravel Collection.
 
 ```php
 # Retrieve all contacts
-$contacts = $xero->contacts()->get();                               
+$contacts = $xero->contacts()->get();
 $contacts = $xero->contacts;
 
 # Retrieve contacts filtered by name
@@ -176,10 +176,10 @@ $contacts = $xero->contacts()->find([
 
 ### Available relationships
 
-The list below shows all available relationships that can be used to access 
-data related to your Xero application (e.g. `$xero->relationshipName`). 
+The list below shows all available relationships that can be used to access
+data related to your Xero application (e.g. `$xero->relationshipName`).
 
-*Note: Some of these relationships may not be available if the related 
+*Note: Some of these relationships may not be available if the related
 service(s) are not enabled for your Xero account.*
 
 ```

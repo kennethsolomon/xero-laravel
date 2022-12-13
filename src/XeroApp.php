@@ -1,17 +1,17 @@
 <?php
 
-namespace LangleyFoxall\XeroLaravel;
+namespace KennethSolomon\XeroLaravel;
 
 use Calcinai\OAuth2\Client\XeroTenant;
 use Exception;
-use LangleyFoxall\XeroLaravel\Traits\HasXeroRelationships;
+use KennethSolomon\XeroLaravel\Traits\HasXeroRelationships;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use XeroPHP\Application;
 
 /**
  * Class XeroApp
  *
- * @package LangleyFoxall\XeroLaravel
+ * @package KennethSolomon\XeroLaravel
  */
 class XeroApp extends Application
 {

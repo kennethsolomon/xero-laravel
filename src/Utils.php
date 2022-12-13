@@ -1,6 +1,6 @@
 <?php
 
-namespace LangleyFoxall\XeroLaravel;
+namespace KennethSolomon\XeroLaravel;
 
 use Exception;
 

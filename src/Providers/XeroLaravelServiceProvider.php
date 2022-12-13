@@ -1,8 +1,8 @@
 <?php
-namespace LangleyFoxall\XeroLaravel\Providers;
+namespace KennethSolomon\XeroLaravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use LangleyFoxall\XeroLaravel\Constants;
+use KennethSolomon\XeroLaravel\Constants;
 
 class XeroLaravelServiceProvider extends ServiceProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace LangleyFoxall\XeroLaravel;
+namespace KennethSolomon\XeroLaravel;
 
 use Calcinai\OAuth2\Client\Provider\Xero as Provider;
 use Calcinai\OAuth2\Client\XeroTenant;
@@ -8,8 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use InvalidArgumentException;
-use LangleyFoxall\XeroLaravel\Exceptions\InvalidOAuth2StateException;
-use LangleyFoxall\XeroLaravel\Exceptions\InvalidXeroRequestException;
+use KennethSolomon\XeroLaravel\Exceptions\InvalidOAuth2StateException;
+use KennethSolomon\XeroLaravel\Exceptions\InvalidXeroRequestException;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
@@ -130,7 +130,7 @@ class OAuth2
      * @param string|null $grantType
      * @return AccessTokenInterface
      */
-    public function refreshAccessToken(AccessTokenInterface $accessToken, ?string $grantType = null)
+    public function refreshAccessToken(AccessTokenInterface $accessToken, string $grantType = null)
     {
         $body = [
             'refresh_token' => $accessToken->getRefreshToken()
